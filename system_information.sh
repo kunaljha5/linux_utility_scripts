@@ -97,7 +97,7 @@ ipdet=$(hostname -i)
 
 
 
-
+variable=`df -PTh|grep -v Filesystem |awk '{print $(NF-1)}'|sed "s|%||g"| sort| tail -1 |awk '{if($1 > 80)  print "\033[01;91m✘    \033[0m"; else print "\033[01;92m✔    \033[0m"}'`
 
 
 
@@ -132,6 +132,7 @@ echo -e "     ┌─────────────────────
      │   • Memory           :   \033[01;95m$Mem_used  \033[0m
      │   • Load average     :   \033[01;95m$load_avg     \033[0m
      │   • Uptime           :   \033[01;95m$uptime_days    \033[0m
+     │   • Disk-space       :   $variable
      │
      │ ➤ \033[01;96mDate-time\033[0m          :   \033[01;95m$dt \033[0m
      └────────────────────────────────────────────────────────────────────"
